@@ -1,0 +1,24 @@
+{
+  "redmine": {
+    "server": "https://redmine.your-company.com",
+    "project": "my-project",
+    "readOnly": false
+  },
+  "bitbucket": {
+    "workspace": "your-company",
+    "repos": ["mobile-app", "backend-api"],
+    "defaultRepo": "mobile-app"
+  },
+  "worklog": {
+    "defaultActivity": "Development",
+    "requireComment": true,
+    "dailyTargetHours": 8
+  },
+  "conventions": {
+    "branch": "feature/{id}-{short-summary}",
+    "commit": "refs #{id} {message}",
+    "inProgressStatus": "In Progress",
+    "reviewStatus": "Resolved",
+    "doneStatus": "Closed"
+  }
+}
