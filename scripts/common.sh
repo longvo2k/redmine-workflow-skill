@@ -104,5 +104,11 @@ bb_get() {
   local url="$path"
   [[ "$url" == http* ]] || url="$BB_API$path"
   local authcfg; authcfg="$(bb_authcfg)" || return 1
-  curl -sS -L --fail-with-body -K <(echo "$authcfg") "$url" "$@"
+  # On an HTTP error the body goes to stderr, so callers never mistake it for data.
+  local out
+  if ! out="$(curl -sS -L --fail-with-body -K <(echo "$authcfg") "$url" "$@" 2>&1)"; then
+    echo "$out" >&2
+    return 1
+  fi
+  printf '%s\n' "$out"
 }
